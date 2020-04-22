@@ -1,5 +1,5 @@
 /**
- * Generate Mattress data
+ * Generate Mattresses data
  */
 
 const Mattress = require('../models/Mattress');

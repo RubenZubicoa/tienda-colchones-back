@@ -1,5 +1,5 @@
 /**
- * Generate user data
+ * Generate users data
  */
 const User = require("../models/User");
 

@@ -9,6 +9,7 @@ var debug = require('debug')('tienda-colchones-backend:server');
 var http = require('http');
 const createMattressData = require('../data/Mattress');
 const createUserData = require('../data/User');
+const createBoxSpringData = require('../data/BoxSpring');
 
 /**
  * Get port from environment and store in Express.
@@ -31,7 +32,7 @@ server.listen(port, () => {
   console.log('server on port', port)
   createMattressData();
   createUserData();
-  
+  createBoxSpringData();
 });
 server.on('error', onError);
 server.on('listening', onListening);

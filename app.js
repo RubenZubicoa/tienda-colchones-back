@@ -10,7 +10,8 @@ require('./database');
 //routers
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var mattressRouter = require('./routes/mattress');
+var mattressesRouter = require('./routes/mattress');
+var springBoxesRouter = require('./routes/boxSpring');
 
 var app = express();
 
@@ -27,7 +28,8 @@ app.use(cors())
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/mattress', mattressRouter);
+app.use('/mattresses', mattressesRouter);
+app.use('/springBoxes', springBoxesRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
