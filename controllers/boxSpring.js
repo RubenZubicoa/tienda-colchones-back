@@ -1,25 +1,43 @@
 const boxSpringCtrl = {};
 
-const BoxSpring = require('../models/BoxSpring')
+const BoxSpring = require("../models/BoxSpring");
 
 boxSpringCtrl.getSpringBoxes = async (req, res) => {
+  try {
     const data = await BoxSpring.find();
-    res.status(200).json(data)
-}
+    return res.status(200).json(data);
+  } catch (err) {
+    return res.status(500).send(err);
+  }
+};
 
 boxSpringCtrl.getBoxSpring = async (req, res) => {
+  try {
     const data = await BoxSpring.findById(req.params.id);
-    res.status(200).json(data)
-}
+    return res.status(200).json(data);
+  } catch (err) {
+    return res.status(500).send(err);
+  }
+};
 
 boxSpringCtrl.createBoxSpring = async (req, res) => {
+  try {
     await BoxSpring.create(req.body);
-    res.status(200).json({Message:'Somier introducido correctamente'})
-}
+    return res
+      .status(200)
+      .json({ Message: "Somier introducido correctamente" });
+  } catch (err) {
+    return res.status(500).send(err);
+  }
+};
 
-boxSpringCtrl.deleteBoxSpring = async (req, res) =>{
+boxSpringCtrl.deleteBoxSpring = async (req, res) => {
+  try{
     await BoxSpring.findByIdAndDelete(req.params.id);
-    res.status(200).json({Message:'Somier eliminado correctamente'})
-}
+    return res.status(200).json({ Message: "Somier eliminado correctamente" });
+  }catch(err){
+      return res.status(500).send(err)
+  }
+};
 
 module.exports = boxSpringCtrl;

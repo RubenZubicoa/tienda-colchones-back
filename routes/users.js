@@ -1,17 +1,13 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
 
+const { getUsers, deleteUser, sigin } = require("../controllers/user");
 
-const { getUsers, deleteUser, sigin} = require('../controllers/user');
-
-
-/* GET users listing. */
-router.route('/')
+router
+  .route("/")
+  /* GET users listing. */
   .get(getUsers)
-  .post(sigin)
-
-/* GET one user */
-router.route('/:id')
-  .delete(deleteUser)
+  /* POST sigin */
+  .post(sigin);
 
 module.exports = router;

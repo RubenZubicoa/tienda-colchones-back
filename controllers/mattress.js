@@ -1,25 +1,41 @@
-const mattressCtrl = {}
+const mattressCtrl = {};
 
-const Mattress = require('../models/Mattress');
+const Mattress = require("../models/Mattress");
 
 mattressCtrl.getMattresses = async (req, res) => {
+  try {
     const mattresses = await Mattress.find();
-    res.json(mattresses)
-}
+    return res.status(200).json(mattresses);
+  } catch (err) {
+    return res.status(500).send(err);
+  }
+};
 
 mattressCtrl.getMattress = async (req, res) => {
+  try {
     const mattress = await Mattress.findById(req.params.id);
-    res.json(mattress)
-}
+    return res.status(200).json(mattress);
+  } catch (err) {
+    return res.status(500).send(err);
+  }
+};
 
 mattressCtrl.createMattress = async (req, res) => {
+  try {
     await Mattress.create(req.body);
-    res.json({Message:'Colchon creado correctamente'})
-}
+    return res.status(200).json({ Message: "Colchon creado correctamente" });
+  } catch (err) {
+    return res.status(500).send(err);
+  }
+};
 
 mattressCtrl.deleteMattress = async (req, res) => {
-    await Mattress.findOneAndDelete({_id: req.params.id});
-    res.json({Message:'Colchon eliminado correctamente'})
-}
+  try {
+    await Mattress.findOneAndDelete({ _id: req.params.id });
+    return res.status(200).json({ Message: "Colchon eliminado correctamente" });
+  } catch (err) {
+    return res.status(500).send(err);
+  }
+};
 
 module.exports = mattressCtrl;
