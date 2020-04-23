@@ -15,7 +15,7 @@ const createBoxSpringData = async () => {
             title:'Somier' + (i + 1),
             image:'https://medias.conforama.pt/akeneoCloud/52038dc6a18c61b74d7e69c94bda62532ad1e785_48184_G1.jpg',
             description: faker.lorem.paragraph(),
-            price: faker.price
+            price: faker.commerce.price()
         })
     }
 }

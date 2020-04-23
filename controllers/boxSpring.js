@@ -11,6 +11,15 @@ boxSpringCtrl.getSpringBoxes = async (req, res) => {
   }
 };
 
+boxSpringCtrl.getSomeSpringBoxes = async (req, res) => {
+  try{
+    const data = await BoxSpring.find()
+    return res.status(200).json(data.slice(1, 6));
+  }catch(err){
+    return res.status(500).send(err);
+  }
+}
+
 boxSpringCtrl.getBoxSpring = async (req, res) => {
   try {
     const data = await BoxSpring.findById(req.params.id);

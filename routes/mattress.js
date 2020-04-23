@@ -1,15 +1,18 @@
 const { Router } = require('express');
 const verifyToken = require('../config/veryfyToken');
-const { getMattresses, getMattress, createMattress, deleteMattress } = require('../controllers/mattress');
+const { getMattresses, getSomeMattresses, getMattress, createMattress, deleteMattress } = require('../controllers/mattress');
 
 const router = Router();
 
 router.route('/')
-    .get(verifyToken, getMattresses)
-    .post(createMattress)
+    .get(getSomeMattresses)
 
-router.route('/:id', verifyToken)
+router.route('/private')
+    .get(verifyToken, getMattresses)
+    .post(verifyToken, createMattress)
+
+router.route('/:id')
     .get(getMattress)
-    .delete(deleteMattress)
+    .delete(verifyToken, deleteMattress)
 
 module.exports = router;

@@ -5,11 +5,21 @@ const Mattress = require("../models/Mattress");
 mattressCtrl.getMattresses = async (req, res) => {
   try {
     const mattresses = await Mattress.find();
+    console.log(req.userId)
     return res.status(200).json(mattresses);
   } catch (err) {
     return res.status(500).send(err);
   }
 };
+
+mattressCtrl.getSomeMattresses = async (req, res) => {
+  try{
+    const mattresses = await Mattress.find()    
+    return res.status(200).json(mattresses.slice(1, 6));
+  }catch(err){
+    return res.status(500).send(err);
+  }
+}
 
 mattressCtrl.getMattress = async (req, res) => {
   try {
