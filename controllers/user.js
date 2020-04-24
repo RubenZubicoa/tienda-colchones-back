@@ -9,6 +9,15 @@ userCtrl.getUsers = async (req, res) => {
   return res.json(users);
 };
 
+userCtrl.getUser = async (req, res) => {
+  try{
+    const user = await User.findById(req.params.id)
+    return res.status(200).json(user);
+  }catch(err){
+    return res.status(500).send(err)
+  }
+}
+
 userCtrl.signin = async (req, res) => {
   const { email, password } = req.body;
   const user = await User.findOne({ email });
@@ -19,7 +28,7 @@ userCtrl.signin = async (req, res) => {
 
   try {
     const token = jwt.sign({ _id: user._id }, "secretKey");
-    return res.status(200).json({ token });
+    return res.status(200).json({ token, user });
   } catch (err) {
     return res.status(500).send(err);
   }

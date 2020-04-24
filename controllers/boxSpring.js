@@ -5,6 +5,7 @@ const BoxSpring = require("../models/BoxSpring");
 boxSpringCtrl.getSpringBoxes = async (req, res) => {
   try {
     const data = await BoxSpring.find();
+    console.log(req.userId)
     return res.status(200).json(data);
   } catch (err) {
     return res.status(500).send(err);

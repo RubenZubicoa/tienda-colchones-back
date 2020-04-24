@@ -48,4 +48,13 @@ mattressCtrl.deleteMattress = async (req, res) => {
   }
 };
 
+mattressCtrl.updateMattress = async(req, res) => {
+  try{
+    await Mattress.findByIdAndUpdate(req.params.id, req.body);
+    return res.status(200).json({Message: "Colchon modificado correctamente"})
+  } catch(err){
+    return res.status(500).send(err)
+  }
+}
+
 module.exports = mattressCtrl;

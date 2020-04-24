@@ -1,7 +1,7 @@
 var express = require("express");
 var router = express.Router();
 
-const { getUsers, deleteUser, signin } = require("../controllers/user");
+const { getUsers, getUser, signin } = require("../controllers/user");
 
 /* GET users listing. */
 router
@@ -10,5 +10,8 @@ router
 
 /* POST signin */
 router.post("/signin", signin);
+
+/** GET one user */
+router.get('/:id', getUser);
 
 module.exports = router;
