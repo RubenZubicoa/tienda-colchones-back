@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const verifyToken = require('../config/veryfyToken');
-const { getSpringBoxes, getSomeSpringBoxes, getBoxSpring, createBoxSpring, deleteBoxSpring } = require('../controllers/boxSpring');
+const { getSpringBoxes, getSomeSpringBoxes, getBoxSpring, createBoxSpring, deleteBoxSpring, updateBoxSpring } = require('../controllers/boxSpring');
 
 const router = Router();
 
@@ -11,8 +11,9 @@ router.route('/private')
     .get(verifyToken, getSpringBoxes)
     .post(verifyToken, createBoxSpring)
 
-router.route('/:id')
-    .get(getBoxSpring)
+router.route('/private/:id')
+    .get(verifyToken, getBoxSpring)
     .delete(verifyToken, deleteBoxSpring)
+    .put(verifyToken, updateBoxSpring)
 
 module.exports = router;

@@ -4,9 +4,8 @@ const BoxSpring = require("../models/BoxSpring");
 
 boxSpringCtrl.getSpringBoxes = async (req, res) => {
   try {
-    const data = await BoxSpring.find();
-    console.log(req.userId)
-    return res.status(200).json(data);
+    const springBoxes = await BoxSpring.find();
+    return res.status(200).json(springBoxes);
   } catch (err) {
     return res.status(500).send(err);
   }
@@ -14,8 +13,8 @@ boxSpringCtrl.getSpringBoxes = async (req, res) => {
 
 boxSpringCtrl.getSomeSpringBoxes = async (req, res) => {
   try{
-    const data = await BoxSpring.find()
-    return res.status(200).json(data.slice(1, 6));
+    const springBoxes = await BoxSpring.find()
+    return res.status(200).json(springBoxes.slice(1, 6));
   }catch(err){
     return res.status(500).send(err);
   }
@@ -23,8 +22,8 @@ boxSpringCtrl.getSomeSpringBoxes = async (req, res) => {
 
 boxSpringCtrl.getBoxSpring = async (req, res) => {
   try {
-    const data = await BoxSpring.findById(req.params.id);
-    return res.status(200).json(data);
+    const boxSpring = await BoxSpring.findById(req.params.id);
+    return res.status(200).json(boxSpring);
   } catch (err) {
     return res.status(500).send(err);
   }
@@ -49,5 +48,14 @@ boxSpringCtrl.deleteBoxSpring = async (req, res) => {
       return res.status(500).send(err)
   }
 };
+
+boxSpringCtrl.updateBoxSpring = async (req, res) => {
+  try{
+    await BoxSpring.findByIdAndUpdate(req.params.id, req.body);
+    return res.status(200).json({Message:'Somier modificado correctamente'});
+  }catch(err){
+    return res.status(500).send(err)
+  }
+}
 
 module.exports = boxSpringCtrl;
