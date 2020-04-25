@@ -4,8 +4,10 @@ const Mattress = require("../models/Mattress");
 
 mattressCtrl.getMattresses = async (req, res) => {
   try {
-    const mattresses = await Mattress.find();
-    console.log(req.userId)
+    var mattresses = await Mattress.find();
+    var page = req.params.page;
+    mattresses = mattresses.slice((page * 10)  - 10, (page * 10))
+    console.log(mattresses)
     return res.status(200).json(mattresses);
   } catch (err) {
     return res.status(500).send(err);
@@ -13,13 +15,13 @@ mattressCtrl.getMattresses = async (req, res) => {
 };
 
 mattressCtrl.getSomeMattresses = async (req, res) => {
-  try{
-    const mattresses = await Mattress.find()    
+  try {
+    const mattresses = await Mattress.find();
     return res.status(200).json(mattresses.slice(1, 6));
-  }catch(err){
+  } catch (err) {
     return res.status(500).send(err);
   }
-}
+};
 
 mattressCtrl.getMattress = async (req, res) => {
   try {
@@ -48,12 +50,23 @@ mattressCtrl.deleteMattress = async (req, res) => {
   }
 };
 
-mattressCtrl.updateMattress = async(req, res) => {
-  try{
+mattressCtrl.updateMattress = async (req, res) => {
+  try {
     await Mattress.findByIdAndUpdate(req.params.id, req.body);
-    return res.status(200).json({Message: "Colchon modificado correctamente"})
-  } catch(err){
-    return res.status(500).send(err)
+    return res
+      .status(200)
+      .json({ Message: "Colchon modificado correctamente" });
+  } catch (err) {
+    return res.status(500).send(err);
+  }
+};
+
+mattressCtrl.getCountMattresses = async (req, res) => {
+  try{
+    const data = await Mattress.count();
+    return res.status(200).json(data)
+  }catch (err) {
+    return res.status(500).send(err);
   }
 }
 
